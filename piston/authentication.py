@@ -3,6 +3,7 @@ import binascii
 import oauth
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User, AnonymousUser
+from theirry-ino.core.client.models import Client
 from django.contrib.auth.decorators import login_required
 from django.template import loader
 from django.contrib.auth import authenticate

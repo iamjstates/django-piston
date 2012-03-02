@@ -15,6 +15,14 @@ In order to implement best practices in API development, we have incorporated th
 * Pluggable envelopes
 * Form error feedback
 
+Changes in Theirry Version
+================================
+
+In order to have to work with Theirry, I have have replaced
+
+* templates to work with jinja
+* remove User table and replace with theirry's client table
+
 Example of API building
 =======================
 
@@ -25,13 +33,13 @@ We'll start by selecting a few models
 models.py::
 
     from django.db import models
-    
+
     class Author(models.Model):
         name = models.CharField(max_length=200)
         biography = models.CharField(required=False)
         url = models.URLField(verify_exists=False, required=False)
-    
-    
+
+
     class Book(models.Model):
         title = models.CharField(max_length=200)
         summary = models.CharField(max_length=2000, required=False)
@@ -56,7 +64,7 @@ models.py::
 
 
     class Award(models.Model):
-        name = models.CharField(max_length=200) 
+        name = models.CharField(max_length=200)
         book = models.ForeignKey(Book, related_name='awards')
         date_awarded = models.DateTimeField()
 
@@ -119,7 +127,7 @@ views/piston.py::
 
 
 Let's also write a PaginationView while we're at it.
-It takes the django page object and some relevant information:: 
+It takes the django page object and some relevant information::
 
     from piston.handler import PistonView, Field
 
@@ -352,9 +360,9 @@ With that, if you have issues with your data and it could not be validated, you 
         "error_code": null,
         "error_message": '',
         "data": {}
-    }    
+    }
 
-We currently don't mandate default usage of the error code or message. You can use it to define your own error scheme. 
+We currently don't mandate default usage of the error code or message. You can use it to define your own error scheme.
 
 If you're retrieving a list of books, you'll see something like::
 
